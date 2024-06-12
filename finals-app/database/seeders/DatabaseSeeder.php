@@ -12,10 +12,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            "name" => "Faustino",
+            "name" => "Doctor",
             "email" => "a@gmail.com",
             "email_verified_at" => now(),
-            "password" => Hash::make("a"),
+            "password" => Hash::make("Abcd12345"),
             "userType" => "doctor"
         ]);
     }

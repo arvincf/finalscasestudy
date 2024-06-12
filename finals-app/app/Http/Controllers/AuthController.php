@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -67,6 +68,7 @@ class AuthController extends Controller
             $user = User::create([
                 'name'=> $request->name,
                 'email'=> $request->email,
+                'email_verified_at' => Carbon::now(),
                 'password'=> $request->password,
                 'userType'=> $request->userType
             ]);

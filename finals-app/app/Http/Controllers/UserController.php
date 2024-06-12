@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
@@ -51,6 +52,7 @@ class UserController extends Controller
             User::create([
                 'name'=> $request->name,
                 'email'=> $request->email,
+                'email_verified_at' => now(),
                 'password'=> $request->password,
                 'userType'=> $request->userType
             ]);
