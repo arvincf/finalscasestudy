@@ -1,20 +1,38 @@
 <template>
   <nav>
-    <router-link v-if="isAdmin" to="/doctors">Doctor Management |</router-link>
-    <router-link v-if="isAdmin" to="/patients"> Patient Management |</router-link>
-    <router-link v-if="isAdmin" to="/appointments"> Appointment Management |</router-link>
-    <router-link v-if="isAdmin" to="/medicalrecords"> Medical Record Management |</router-link>
-    <router-link v-if="isAdmin" to="/users"> Admin View |</router-link>
+    <router-link v-if="isAdmin" to="/doctors" class="text"
+      >Doctor Management</router-link
+    >
+    <router-link v-if="isAdmin" to="/patients" class="text"
+      >Patient Management</router-link
+    >
+    <router-link v-if="isAdmin" to="/appointments" class="text">
+      Appointment Management</router-link
+    >
+    <router-link v-if="isAdmin" to="/medicalrecords" class="text">
+      Medical Record Management</router-link
+    >
+    <router-link v-if="isAdmin" to="/users" class="text">
+      Admin View</router-link
+    >
 
-
-    <router-link v-if="isDoctor" to="/patients"> My Patients |</router-link>
-    <router-link v-if="isDoctor || isPatient" to="/appointments"> My Appointments |</router-link>
-    <router-link v-if="isDoctor || isPatient" to="/medicalrecords"> My Medical Records |</router-link>
+    <router-link v-if="isDoctor" to="/patients" class="text">
+      My Patients</router-link
+    >
+    <router-link v-if="isDoctor || isPatient" to="/appointments" class="text">
+      My Appointments</router-link
+    >
+    <router-link v-if="isDoctor || isPatient" to="/medicalrecords" class="text">
+      My Medical Records</router-link
+    >
 
     <!-- <router-link v-if="isDoctor || isPatient">My Profile</router-link> -->
-    <router-link to="/logout"> Logout |</router-link>
-    <br>
-    <button type="submit" class="btn btn-primary m-1" @click="viewprofile()">My Profile</button>
+    <router-link to="/logout" class="text"> Logout</router-link>
+    <div class="profile">
+      <button type="submit" class="btn btn-primary m-1" @click="viewprofile()">
+        My Profile
+      </button>
+    </div>
   </nav>
 
   <Modal v-if="showeditUserModal" @close="showeditUserModal = false">
@@ -25,19 +43,42 @@
       <form @submit.prevent="updateUser()" class="registration-form">
         <div class="form-group">
           <label for="name">Name:</label>
-          <input class="form-control" type="text" v-model="editUserData.name" id="name" required>
+          <input
+            class="form-control"
+            type="text"
+            v-model="editUserData.name"
+            id="name"
+            required
+          />
         </div>
         <div class="form-group">
           <label for="email">Email:</label>
-          <input class="form-control" type="text" v-model="editUserData.email" id="email" required>
+          <input
+            class="form-control"
+            type="text"
+            v-model="editUserData.email"
+            id="email"
+            required
+          />
         </div>
         <div class="form-group">
           <label for="password">Password:</label>
-          <input class="form-control" type="password" v-model="editUserData.password" id="password" required>
+          <input
+            class="form-control"
+            type="password"
+            v-model="editUserData.password"
+            id="password"
+            required
+          />
         </div>
         <div class="form-group">
           <label for="userType">User Type:</label>
-          <select class="form-control" id="userType" v-model="editUserData.userType" required>
+          <select
+            class="form-control"
+            id="userType"
+            v-model="editUserData.userType"
+            required
+          >
             <option value="admin">Administrator</option>
             <option value="doctor">Doctor</option>
             <option value="patient">Patient</option>
@@ -52,37 +93,37 @@
 </template>
 
 <script>
-import Modal from '@/components/PopUpModal.vue';
-import axios from 'axios';
+import Modal from "@/components/PopUpModal.vue";
+import axios from "axios";
 
 export default {
-  name: 'DashBoard',
+  name: "DashBoard",
   components: {
-    Modal
+    Modal,
   },
   data() {
     return {
       user: null,
       showeditUserModal: false,
       editUserData: {
-        id: '',
-        name: '',
-        email: '',
-        password: '',
-        userType: '',
-        updated_at: ''
+        id: "",
+        name: "",
+        email: "",
+        password: "",
+        userType: "",
+        updated_at: "",
       },
     };
   },
   computed: {
     isAdmin() {
-      return this.user && this.user.userType === 'admin';
+      return this.user && this.user.userType === "admin";
     },
     isDoctor() {
-      return this.user && this.user.userType === 'doctor';
+      return this.user && this.user.userType === "doctor";
     },
     isPatient() {
-      return this.user && this.user.userType === 'patient';
+      return this.user && this.user.userType === "patient";
     },
   },
   created() {
@@ -90,25 +131,49 @@ export default {
   },
   methods: {
     loadUserFromLocalStorage() {
-      const user = localStorage.getItem('user');
+      const user = localStorage.getItem("user");
       if (user) {
         this.user = JSON.parse(user);
-        this.editUserData = {...this.user};
+        this.editUserData = { ...this.user };
       }
     },
     viewprofile() {
       this.showeditUserModal = true;
     },
     async updateUser() {
-            this.editUserData.updated_at = new Date().toISOString();
-            await axios.put(`http://127.0.0.1:8000/api/doctor/${this.editUserData.id}`, this.editUserData, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
-                }
-            });
-            this.showeditUserModal = false;
-        },
+      this.editUserData.updated_at = new Date().toISOString();
+      await axios.put(
+        `http://127.0.0.1:8000/api/doctor/${this.editUserData.id}`,
+        this.editUserData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
+      this.showeditUserModal = false;
+    },
   },
 };
 </script>
+
+<style scoped>
+nav {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+.text {
+  text-decoration: none;
+  margin: 0 16px;
+}
+.text:hover {
+  background: #42b983;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 24px;
+}
+</style>

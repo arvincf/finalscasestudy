@@ -2,8 +2,7 @@
   <router-view />
 </template>
 
-<script>
-</script>
+<script></script>
 
 <style>
 #app {
@@ -13,7 +12,9 @@
   text-align: center;
   color: #2c3e50;
 }
-
+html {
+  padding: 0 32px;
+}
 nav {
   padding: 30px;
 }
@@ -28,6 +29,6 @@ nav a.router-link-exact-active {
 }
 
 .table > tbody > tr > td {
-     vertical-align: middle;
+  vertical-align: middle;
 }
 </style>
