@@ -4,15 +4,15 @@
     <form @submit.prevent="register" class="registration-form">
       <div class="form-group">
         <label for="name">Name:</label>
-        <input type="text" v-model="name" id="name" required>
+        <input type="text" v-model="name" id="name" required />
       </div>
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="text" v-model="email" id="email" required>
+        <input type="text" v-model="email" id="email" required />
       </div>
       <div class="form-group">
         <label for="password">Password:</label>
-        <input type="password" v-model="password" id="password" required>
+        <input type="password" v-model="password" id="password" required />
       </div>
       <div class="form-group">
         <label for="userType">User Type:</label>
@@ -25,55 +25,59 @@
       <button type="submit">Register</button>
     </form>
     <div v-if="error" class="error">{{ error }}</div>
-    <router-link to="/login">Login</router-link>
+    <div class="bottom">
+      <p class="bottom__no-account">Already have an Account?</p>
+      <router-link to="/login" class="register">Login</router-link>
+    </div>
   </div>
 </template>
 
-
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   data() {
     return {
-      name: '',
-      email: '',
-      password: '',
-      userType: '',
-      error: ''
+      name: "",
+      email: "",
+      password: "",
+      userType: "",
+      error: "",
     };
   },
   methods: {
     async register() {
       try {
-        const response = await axios.post('http://127.0.0.1:8000/api/register', {
-          name: this.name,
-          email: this.email,
-          password: this.password,
-          userType: this.userType
-        });
+        const response = await axios.post(
+          "http://127.0.0.1:8000/api/register",
+          {
+            name: this.name,
+            email: this.email,
+            password: this.password,
+            userType: this.userType,
+          }
+        );
         console.log(response.data); // Log the response for debugging
 
-        this.name = '';
-        this.email = '';
-        this.password = '';
-        this.userType = '';
+        this.name = "";
+        this.email = "";
+        this.password = "";
+        this.userType = "";
       } catch (err) {
         if (err.response) {
           this.error = `Error: ${err.response.data.message}`;
           console.error(err.response.data);
         } else if (err.request) {
-          this.error = 'No response from server. Please try again later.';
+          this.error = "No response from server. Please try again later.";
           console.error(err.request);
         } else {
-          this.error = 'Request error. Please check your input and try again.';
-          console.error('Error', err.message);
+          this.error = "Request error. Please check your input and try again.";
+          console.error("Error", err.message);
         }
       }
-    }
-  }
+    },
+  },
 };
-
 </script>
 
 <style>
@@ -83,11 +87,12 @@ export default {
 
 .registration-container {
   max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
+  margin: 100px auto;
+  padding: 32px;
+  border: 1px solid #b4b4b4;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: #cbcbcb;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
 }
 
 .registration-form {
