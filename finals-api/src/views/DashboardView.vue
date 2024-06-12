@@ -1,28 +1,28 @@
 <template>
   <nav>
-    <router-link v-if="isAdmin" to="/doctors" class="text"
+    <router-link v-if="isAdmin" to="/doctors" class="text" exact-active-class="active-link"
       >Doctor Management</router-link
     >
-    <router-link v-if="isAdmin" to="/patients" class="text"
+    <router-link v-if="isAdmin" to="/patients" class="text" exact-active-class="active-link"
       >Patient Management</router-link
     >
-    <router-link v-if="isAdmin" to="/appointments" class="text">
+    <router-link v-if="isAdmin" to="/appointments" class="text" exact-active-class="active-link">
       Appointment Management</router-link
     >
-    <router-link v-if="isAdmin" to="/medicalrecords" class="text">
+    <router-link v-if="isAdmin" to="/medicalrecords" class="text" exact-active-class="active-link">
       Medical Record Management</router-link
     >
-    <router-link v-if="isAdmin" to="/users" class="text">
+    <router-link v-if="isAdmin" to="/users" class="text" exact-active-class="active-link">
       Admin View</router-link
     >
 
-    <router-link v-if="isDoctor" to="/patients" class="text">
+    <router-link v-if="isDoctor" to="/patients" class="text" exact-active-class="active-link">
       My Patients</router-link
     >
-    <router-link v-if="isDoctor || isPatient" to="/appointments" class="text">
+    <router-link v-if="isDoctor || isPatient" to="/appointments" class="text" exact-active-class="active-link">
       My Appointments</router-link
     >
-    <router-link v-if="isDoctor || isPatient" to="/medicalrecords" class="text">
+    <router-link v-if="isDoctor || isPatient" to="/medicalrecords" class="text" exact-active-class="active-link">
       My Medical Records</router-link
     >
 
@@ -171,6 +171,13 @@ nav {
   margin: 0 16px;
 }
 .text:hover {
+  background: #42b983;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 24px;
+}
+
+.active-link {
   background: #42b983;
   color: white;
   padding: 8px 12px;
