@@ -19,11 +19,20 @@ class DatabaseSeeder extends Seeder
             "userType" => "doctor"
         ]);
 
+
         User::create([
             "name" => "Patient",
             "email" => "b@gmail.com",
             "email_verified_at" => now(),
             "password" => Hash::make("Bibi1234"),
+            "userType" => "patient"
+        ]);
+
+        User::create([
+            "name" => "Patient2",
+            "email" => "d@gmail.com",
+            "email_verified_at" => now(),
+            "password" => Hash::make("Didi1234"),
             "userType" => "patient"
         ]);
 

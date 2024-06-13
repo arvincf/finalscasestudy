@@ -21,7 +21,7 @@
           <th>ID</th>
           <th>Patient Name</th>
           <th>Details</th>
-          <!-- <th v-if="isAdmin || isDoctor" >Actions</th> -->
+          <th v-if="isDoctor" >Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -31,14 +31,14 @@
           <td>{{ record.RecordDetails }}</td>
           <td>
             <button
-              v-if="isAdmin || isDoctor"
+              v-if="isDoctor"
               class="btn btn-success btn-sm m-1"
               @click="editMedicalRecord(record)"
             >
               Edit
             </button>
             <button
-              v-if="isAdmin"
+              v-if="isADoctor"
               class="btn btn-danger btn-sm m-1"
               @click="deleteMedicalRecord(record)"
             >
